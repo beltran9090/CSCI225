@@ -1,2 +1,2 @@
 # CSCI225
-school
+
