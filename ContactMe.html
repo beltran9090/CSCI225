@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+</head>
+
+<body>
+    <h1>Contact Me</h1>
+    <p><a href="index.html"> Return to Home Page</a></p>
+   
+    <h2>Video</h2>
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/QC8iQqtG0hg?si=w1Q6LYq-YWy2hZix" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+     <h2> Feedback Form</h2>
+     <p>
+        <label>Last Name:
+            <input type="text" name="lname"
+            placeholder="anonymous" required>
+        </label>
+     </p>
+     
+     <p>
+        <label>Email:
+            <input type="email" name="mail"
+            placeholder="name@domain.com">
+        </label>
+     </p>
+     
+     <form name="feedback">
+        <p>
+            <label>First Name:
+                <input type="text" name="fname"
+                placeholder="anonymous" requierd>
+                
+            </label>
+        </p>
+       
+        <p>Would you recommend this website?</p>
+        <label>
+            <input type="radio" name="recommend" value="yes">yes
+        </label>
+        <label>
+            <input type="radio" name="recommend" value="no">No
+        </label>
+        <p>
+            <label>Favorite Website:
+                <select name="favorite">
+                <option value="google">Google</option>
+                <option value="facebook">Facebook</option>
+                <option value="twitter">Twitter</option>
+                <option value="time">Time</option>
+                </select>
+            </label>
+</p>
+        
+        <p>
+            <label>Rating:
+                <input type="range" name="rating" min="1" max="10">
+            </label>
+        </p>
+
+        <p>
+            <label>Additional Comments:<br>
+            <textarea name="comment"></textarea>
+            </label>
+        </p>
+
+        <p>
+            <label>Favorite Color:
+                <input type="color" name="color">
+            </label>
+        </p>
+
+        <p>
+            <label>Visit Date:
+                <input type="date" name="date">
+            </label>
+        </p>
+
+        <p>
+            <label>Website:
+                <input type="url" name="website">
+            </label>
+        </p>
+
+        <input type="submit" name="submit" value="Submit Feedback">
+
+     </form>
+</body>
+</html>
