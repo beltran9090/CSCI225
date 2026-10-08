@@ -89,7 +89,8 @@ img {
         margin-bottom: 20px;
     }
 }
-    /* Text and links */
+
+/* Text and links */
 h1,
 h2 {
     text-transform: uppercase;
@@ -130,7 +131,7 @@ a:hover {
     box-shadow: 3px 3px 8px #aaa;
 }
 
-    /* Schedule table */
+/* Schedule table */
 table {
     width: 100%;
     border-collapse: separate;
@@ -154,7 +155,8 @@ th {
 tr:nth-child(even) {
     background-color: #e0edf3;
 }
-    /* Page background */
+
+/* Page background */
 body {
     background-image: url("../img/background.jpg");
     background-size: cover;
@@ -163,19 +165,23 @@ body {
     background-attachment: fixed;
 }
 
-section, aside {
+section,
+aside {
     background-color: rgba(255, 255, 255, 0.85);
 }
-    /* Hover movement */
-section, aside {
+
+/* Hover movement */
+section,
+aside {
     transition: transform 0.3s;
 }
 
-section:hover, aside:hover {
+section:hover,
+aside:hover {
     transform: translateY(-5px);
 }
 
-    /* Footer animation */
+/* Footer animation */
 footer address {
     animation: contactMove 3s ease-in-out infinite alternate;
 }
@@ -184,17 +190,20 @@ footer address {
     from {
         transform: translateX(-10px);
     }
+
     to {
         transform: translateX(10px);
     }
 }
-    /* Web font for all paragraphs */
-	p{
-		font-family: "Lora", Georgia, serif;
-	}
-    /* image markers for portfolio list */
-    
-    .portfolio ul {
+
+/* Web font for all paragraphs */
+p {
+    font-family: "Lora", Georgia, serif;
+}
+
+/* image markers for portfolio list */
+
+.portfolio ul {
     list-style: none;
     padding-left: 0;
 }
