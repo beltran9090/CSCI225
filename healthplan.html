@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allen B Health Plan</title>
+</head>
+
+<body>
+
+    <h1>Allen B Health Plan</h1>
+
+    <h2>Meal Plan</h2>
+
+    <input type="button" id="mealPlan" value="Generate Meal Plan">
+
+    <ul id="mealList"></ul>
+    <p id="mealTotal"></p>
+    <p id="mealCalories">
+
+    </p>
+
+    <p><a href="index.html">Home</a></p>
+
+    <p>
+        <label for="weight">Weight (kg):</label>
+        <input type="text" id="weight">
+    </p>
+
+    <p>
+        <label for="height">Height (cm):</label>
+        <input type="text" id="height">
+    </p>
+
+    <p>
+        <label for="age">Age:</label>
+
+        <input type="text" id="age">
+    </p>
+
+    <p>
+
+        <label for="gender">Gender: </label>
+
+        <select id="gender">
+            <option value="men">Men </option>
+            <option value="women"> Women </option>
+
+        </select>
+
+    </p>
+
+    <input type="button" id="calculate" value="Calculate">
+
+    <p id="bmiResult">
+
+    </p>
+
+    <p id="calorieResult"></p>
+    <h2>BMI Animation</h2>
+    <img id="person" src="img/person.png" alt="My person drawing" width="150" height="200">
+
+    <script>
+
+        const foodDatabase = [
+            { name: "Apple (1 medium)", cal: 95 },
+            { name: "Banana (1 medium)", cal: 105 },
+            { name: "Orange (1 medium)", cal: 62 },
+            { name: "Grapes (1 cup)", cal: 104 },
+            { name: "Strawberries (1 cup)", cal: 49 },
+            { name: "Broccoli (1 cup)", cal: 55 },
+            { name: "Carrots (1 cup)", cal: 52 },
+            { name: "Spinach (1 cup)", cal: 7 },
+            { name: "Potato (1 medium)", cal: 161 },
+            { name: "Sweet Potato (1 medium)", cal: 103 },
+            { name: "Avocado (half)", cal: 117 },
+            { name: "Chicken Breast (4oz)", cal: 165 },
+            { name: "Salmon (4oz)", cal: 235 },
+            { name: "Ground Beef 80/20 (4oz)", cal: 287 },
+            { name: "Egg (1 large)", cal: 72 },
+            { name: "Tofu (1/2 cup)", cal: 94 },
+            { name: "Black Beans (1/2 cup)", cal: 114 },
+            { name: "Lentils (1/2 cup)", cal: 115 },
+            { name: "Plain Greek Yogurt (1 cup)", cal: 100 },
+            { name: "Almonds (1 oz)", cal: 164 },
+            { name: "Peanuts (1 oz)", cal: 161 },
+            { name: "Peanut Butter (2 tbsp)", cal: 188 },
+            { name: "Brown Rice (1 cup cooked)", cal: 216 },
+            { name: "White Rice (1 cup cooked)", cal: 205 },
+            { name: "Quinoa (1 cup cooked)", cal: 222 },
+            { name: "Oats (1/2 cup dry)", cal: 150 },
+            { name: "Whole Wheat Bread (1 slice)", cal: 69 },
+            { name: "White Bread (1 slice)", cal: 75 },
+            { name: "Pasta (1 cup cooked)", cal: 220 },
+            { name: "Bagel (1 medium)", cal: 245 },
+            { name: "Flour Tortilla (8 inch)", cal: 144 },
+            { name: "Vanilla Ice Cream (1/2 cup)", cal: 137 },
+            { name: "Chocolate Chip Cookie (1 medium)", cal: 148 },
+            { name: "Potato Chips (1 oz)", cal: 152 },
+            { name: "Pretzels (1 oz)", cal: 108 },
+            { name: "Cheddar Cheese (1 oz)", cal: 113 },
+            { name: "Butter (1 tbsp)", cal: 102 },
+            { name: "Olive Oil (1 tbsp)", cal: 119 },
+            { name: "Whole Milk (1 cup)", cal: 149 },
+            { name: "Almond Milk (1 cup)", cal: 39 },
+            { name: "Orange Juice (1 cup)", cal: 112 },
+            { name: "Cola (12 oz)", cal: 140 },
+            { name: "Black Coffee (8 oz)", cal: 2 },
+            { name: "Bacon (2 slices)", cal: 86 },
+            { name: "Pork Sausage (1 link)", cal: 133 },
+            { name: "Pancakes (2 medium)", cal: 172 },
+            { name: "Waffle (1 large)", cal: 218 },
+            { name: "Honey (1 tbsp)", cal: 64 },
+            { name: "Maple Syrup (1 tbsp)", cal: 52 },
+            { name: "Cheese Pizza (1 slice)", cal: 285 }
+
+        ];
+
+        let calorieTarget = 0;
+
+        function calculate() {
+
+            let weight = Number(document.querySelector("#weight").value);
+            let height = Number(document.querySelector("#height").value);
+            let age = Number(document.querySelector("#age").value);
+            let gender = document.querySelector("#gender").value;
+
+            if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {
+
+                calorieTarget = 0;
+
+                document.querySelector("#bmiResult").textContent =
+                    "Enter positive numbers for weight, height and age.";
+
+                document.querySelector(" #calorieResult ").textContent = " ";
+            } else {
+                let meters = height / 100;
+                let bmi = weight / (meters * meters);
+                const person = document.querySelector("#person");
+                let personWidth = bmi * 6;
+                person.animate([
+                    { width: "150px", height: "200px" },
+                    { width: personWidth + "px", height: "200px" }
+                ], {
+                    duration: 1000,
+                    fill: "forwards"
+                });
+                let basicCalories = 0;
+
+                if (gender == "men") {
+                    basicCalories = weight * 10 + height * 6.25 - age * 5 + 5;
+                } else if (gender == "women") {
+                    basicCalories = weight * 10 + height * 6.25 - age * 5 - 161;
+                }
+
+                calorieTarget = basicCalories;
+
+                if (bmi >= 30) {
+                    calorieTarget = basicCalories - 750;
+                } else if (bmi >= 25) {
+                    calorieTarget = basicCalories - 500;
+                } else {
+                    calorieTarget = basicCalories;
+                }
+
+                document.querySelector("#bmiResult").textContent =
+
+                    "BMI: " + bmi.toFixed(2);
+
+                document.querySelector("#calorieResult").textContent =
+                    "Calorie Target: " + calorieTarget.toFixed(2);
+            }
+        }
+
+
+        const calculateButton = document.querySelector("#calculate");
+
+        calculateButton.addEventListener("click", calculate);
+
+        function generateMealPlan() {
+            calculate();
+
+            document.querySelector("#mealList").innerHTML = "";
+            document.querySelector("#mealTotal").textContent = "";
+            document.querySelector("#mealCalories").textContent = "";
+
+            if (calorieTarget <= 0) {
+
+                document.querySelector("#mealTotal").textContent = "Enter valid information and calculate a positive calorie target.";
+            } else {
+                let order = [];
+
+                for (let i = 0; i < foodDatabase.length; i++) {
+                    order[i] = i;
+                }
+
+                // Mix the food order.
+
+                for (let i = order.length - 1; i > 0; i--) {
+                    let random = Math.floor(Math.random() * (i + 1));
+                    let temp = order[i]; order[i] = order[random]; order[random] = temp;
+                }
+
+                let limit = Math.floor(calorieTarget);
+                let possible = [];
+                let choices = [];
+
+                possible[0] = true;
+
+                // Check which calorie totals we can make.
+
+                for (let i = 0; i < order.length; i++) {
+                    let foodIndex = order[i];
+
+                    let calories = foodDatabase[foodIndex].cal;
+
+                    for (let total = limit; total >= calories; total--) {
+                        if (!possible[total] && possible[total - calories]) {
+                            possible[total] = true;
+                            choices[total] = {
+
+                                food: foodIndex,
+
+                                previous: choices[total - calories]
+                            };
+                        }
+                    }
+                }
+
+                // Find the closest total without going over.
+
+                let bestTotal = 0;
+
+                for (let total = 0; total <= limit; total++) {
+                    if (possible[total]) {
+
+                        bestTotal = total;
+                    }
+                }
+
+                // Display the selected foods.
+
+                for (let choice = choices[bestTotal];
+                    choice != undefined;
+                    choice = choice.previous) {
+
+                    let food = foodDatabase[choice.food];
+
+                    document.querySelector("#mealList").innerHTML +=
+                        "<li>" + food.name + " - " + food.cal + " calories</li>";
+                }
+
+
+                document.querySelector("#mealTotal").textContent =
+
+                    "Total Meal Calories: " + bestTotal;
+
+
+                document.querySelector("#mealCalories").textContent =
+
+                    "Calories Remaining: " + (calorieTarget - bestTotal).toFixed(2);
+
+            }
+
+        }
+
+        const mealButton = document.querySelector("#mealPlan");
+
+        mealButton.addEventListener("click", generateMealPlan);
+
+    </script>
+
+</body>
+
+</html>
